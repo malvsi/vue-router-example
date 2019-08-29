@@ -4,9 +4,23 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import './assets/css/app.css'
+import Util from './lib/utils'
+
+Vue.use(Util)
+
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
+/* // 自定义插件的方法
+let custom = {
+  install: function (Vue, options) {
+    Vue.prototype.$abc = '自定义'
+  }
+}
+
+Vue.use(custom) */
+
+// eslint-disable-next-line no-new
 new Vue({
   el: '#app',
   router,

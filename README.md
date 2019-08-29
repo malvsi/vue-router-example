@@ -1,3 +1,33 @@
+# 知识点
+> 获取当前路由的实例对象
+``` bash
+let _this = router.app
+```
+> 自定义插件
+``` bash
+# 定义插件源对象
+let custom = {
+    save(key, value) {
+        localStorage.setItem(key,JSON.stringfy(value))
+    },
+    fetch(key) {
+        return JSON.parse(localStorage.getItem(key)) || {}
+    }
+}
+# 装载为插件
+let local = {
+    install: (vm) => {
+        vm.prototype.$local = custom
+    }
+}
+# 使用插件
+Vue.use(local)
+```
+> 获取当前路由的路径
+``` bash
+let path = this.$route.path 
+```
+
 # vue-cli-example
 
 > A Vue.js project
