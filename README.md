@@ -28,7 +28,7 @@ Vue.use(local)
 let path = this.$route.path 
 ```
 
-# vue-cli-example
+# vue-route-example
 
 > A Vue.js project
 
