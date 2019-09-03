@@ -27,6 +27,15 @@ Vue.use(local)
 ``` bash
 let path = this.$route.path 
 ```
+> 组件懒加载
+``` bash
+# Layout组件懒加载
+let Layout = (resolve)=> {
+    return require.ensure([],()=> {
+        resolve(require('@/views/layout'))
+    },'chunkName')
+}
+```
 
 # vue-router-example
 

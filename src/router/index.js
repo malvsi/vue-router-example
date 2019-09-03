@@ -2,13 +2,33 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '@/components/home'
-import Layout from '@/views/layout'
-import Project from '@/views/backend/project'
-import Doc from '@/views/backend/doc'
-import Workbench from '@/views/backend/workbench'
+// import Layout from '@/views/layout'
+// import Project from '@/views/backend/project'
+// import Doc from '@/views/backend/doc'
+// import Workbench from '@/views/backend/workbench'
 import Login from '@/components/login'
 
 Vue.use(Router)
+
+// 实现懒加载-->异步加载
+let Layout = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/views/layout'))
+  }, 'layout')
+}
+
+// require.ensure()第三个参数：‘chunkName’如果相同，那么会把两个js文件合并成同一个文件
+let Project = require.ensure([], () => {
+  require('@/views/backend/project')
+}, 'chunk')
+
+let Workbench = require.ensure([], () => {
+  require('@/views/backend/workbench')
+}, 'chunk')
+
+let Doc = (resolve) => {
+  return import('@/views/backend/doc')
+}
 
 let router = new Router({
   linkActiveClass: 'is-active',
