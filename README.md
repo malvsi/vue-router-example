@@ -27,14 +27,26 @@ Vue.use(local)
 ``` bash
 let path = this.$route.path 
 ```
-> 组件懒加载
+## 按需加载组建的方法
+> 第一种
 ``` bash
-# Layout组件懒加载
-let Layout = (resolve)=> {
-    return require.ensure([],()=> {
-        resolve(require('@/views/layout'))
-    },'chunkName')
-}
+let App = () => import('@/components/App.vue')
+```
+> 第二种
+```bash
+let App = resolve => require.ensure([], ()=> resolve(require('@/components/App')),'chunkName')
+```
+> 第三种
+```bash
+let router = new Router({
+    routes: [
+        {
+            path: '/app',
+            name: 'App',
+            component: resolve => require(['@/components/App'],resole)
+        }
+    ]
+})
 ```
 
 # vue-router-example

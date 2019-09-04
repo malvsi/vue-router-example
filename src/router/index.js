@@ -18,17 +18,11 @@ let Layout = (resolve) => {
 }
 
 // require.ensure()第三个参数：‘chunkName’如果相同，那么会把两个js文件合并成同一个文件
-let Project = require.ensure([], () => {
-  require('@/views/backend/project')
-}, 'chunk')
+let Project = r => require.ensure([], () => r(require('@/views/backend/project')), 'chunk')
 
-let Workbench = require.ensure([], () => {
-  require('@/views/backend/workbench')
-}, 'chunk')
+let Workbench = r => require.ensure([], () => r(require('@/views/backend/workbench')), 'chunk')
 
-let Doc = (resolve) => {
-  return import('@/views/backend/doc')
-}
+let Doc = () => import('@/views/backend/doc')
 
 let router = new Router({
   linkActiveClass: 'is-active',
